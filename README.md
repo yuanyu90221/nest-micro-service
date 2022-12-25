@@ -17,3 +17,7 @@ nest new micro
 ## TCP
 
 use TCP as Transport Protocol
+
+## REDIS
+
+use Redis as Message broker

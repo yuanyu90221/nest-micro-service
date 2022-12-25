@@ -11,10 +11,11 @@ export class MathService {
   private client: ClientProxy;
   constructor(private readonly configService: ConfigService) {
     this.client = ClientProxyFactory.create({
-      transport: Transport.TCP,
+      transport: Transport.REDIS,
       options: {
-        host: this.configService.get<string>('MICRO_SERVICE_HOST'),
-        port: this.configService.get<number>('MICRO_SERVICE_PORT'),
+        host: this.configService.get<string>('REDIS_HOST'),
+        port: this.configService.get<number>('REDIS_PORT'),
+        password: this.configService.get<string>('REDIS_PASSWORD'),
       },
     });
   }

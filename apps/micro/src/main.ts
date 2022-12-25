@@ -8,10 +8,11 @@ async function bootstrap() {
   const app = await NestFactory.create(MicroModule);
   const configService = await app.get(ConfigService);
   const micro = await NestFactory.createMicroservice(MicroModule, {
-    transport: Transport.TCP,
+    transport: Transport.REDIS,
     options: {
-      host: configService.get<string>('MICRO_SERVICE_HOST'),
-      port: configService.get<number>('MICRO_SERVICE_PORT'),
+      host: configService.get<string>('REDIS_HOST'),
+      port: configService.get<number>('REDIS_PORT'),
+      password: configService.get<string>('REDIS_PASSWORD'),
     },
   });
   micro.listen().then(() => {
