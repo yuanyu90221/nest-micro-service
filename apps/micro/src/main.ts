@@ -2,17 +2,15 @@ import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { Transport } from '@nestjs/microservices';
 import { MicroModule } from './micro.module';
-import { ConfigService } from '@nestjs/config';
+import { join } from 'path';
 const logger = new Logger('Main');
 async function bootstrap() {
-  const app = await NestFactory.create(MicroModule);
-  const configService = await app.get(ConfigService);
+  console.log(__dirname);
   const micro = await NestFactory.createMicroservice(MicroModule, {
-    transport: Transport.REDIS,
+    transport: Transport.GRPC,
     options: {
-      host: configService.get<string>('REDIS_HOST'),
-      port: configService.get<number>('REDIS_PORT'),
-      password: configService.get<string>('REDIS_PASSWORD'),
+      package: 'app',
+      protoPath: join(__dirname, '../../grpc-proto/app.proto'),
     },
   });
   micro.listen().then(() => {

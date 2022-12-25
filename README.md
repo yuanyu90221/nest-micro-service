@@ -21,3 +21,7 @@ use TCP as Transport Protocol
 ## REDIS
 
 use Redis as Message broker
+
+## GRPC
+
+use GRPC as Transport Protocol
