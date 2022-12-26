@@ -5,15 +5,15 @@ import { MicroModule } from './micro.module';
 import { join } from 'path';
 const logger = new Logger('Main');
 async function bootstrap() {
-  console.log(__dirname);
-  const micro = await NestFactory.createMicroservice(MicroModule, {
+  const app = await NestFactory.create(MicroModule);
+  app.connectMicroservice({
     transport: Transport.GRPC,
     options: {
       package: 'app',
       protoPath: join(__dirname, '../../grpc-proto/app.proto'),
     },
   });
-  micro.listen().then(() => {
+  app.startAllMicroservices().then(() => {
     logger.log('Microservice is listening...');
   });
 }
