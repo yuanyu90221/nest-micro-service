@@ -7,7 +7,7 @@ const logger = new Logger('Main');
 async function bootstrap() {
   const app = await NestFactory.create(MicroModule);
   const configService = await app.get(ConfigService);
-  const micro = await NestFactory.createMicroservice(MicroModule, {
+  app.connectMicroservice({
     transport: Transport.REDIS,
     options: {
       host: configService.get<string>('REDIS_HOST'),
@@ -15,7 +15,7 @@ async function bootstrap() {
       password: configService.get<string>('REDIS_PASSWORD'),
     },
   });
-  micro.listen().then(() => {
+  app.startAllMicroservices().then(() => {
     logger.log('Microservice is listening...');
   });
 }
