@@ -14,7 +14,9 @@
       "entryFile": "main",
       "sourceRoot": "apps/http-api/src",
       "compilerOptions": {
-        "tsConfigPath": "apps/http-api/tsconfig.app.json"
+        "tsConfigPath": "apps/http-api/tsconfig.app.json",
+        "assets": ["**/*.proto"],
+        "watchAssets": true
       }
     },
     "micro": {
@@ -23,7 +25,9 @@
       "entryFile": "main",
       "sourceRoot": "apps/micro/src",
       "compilerOptions": {
-        "tsConfigPath": "apps/micro/tsconfig.app.json"
+        "tsConfigPath": "apps/micro/tsconfig.app.json",
+        "assets": ["**/*.proto"],
+        "watchAssets": true
       }
     }
   }

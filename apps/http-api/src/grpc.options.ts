@@ -4,6 +4,6 @@ export const microserviceOption: ClientOptions = {
   transport: Transport.GRPC,
   options: {
     package: 'app',
-    protoPath: join(__dirname, '../../grpc-proto/app.proto'),
+    protoPath: join(__dirname, 'proto/app.proto'),
   },
 };

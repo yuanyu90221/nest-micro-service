@@ -1,6 +1,6 @@
 import { Body, Controller, Logger, OnModuleInit, Post } from '@nestjs/common';
 import { Client, ClientGrpc } from '@nestjs/microservices';
-import { IGrpcService } from './grpc.interface';
+import { IGrpcService as AppControllerController } from './grpc.interface';
 import { microserviceOption } from './grpc.options';
 
 @Controller()
@@ -9,9 +9,10 @@ export class AppController implements OnModuleInit {
 
   @Client(microserviceOption)
   private client: ClientGrpc;
-  private grpcService: IGrpcService;
+  private grpcService: AppControllerController;
   onModuleInit() {
-    this.grpcService = this.client.getService<IGrpcService>('AppController');
+    this.grpcService =
+      this.client.getService<AppControllerController>('AppController');
   }
 
   @Post('add')
