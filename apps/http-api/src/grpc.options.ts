@@ -5,5 +5,6 @@ export const microserviceOption: ClientOptions = {
   options: {
     package: 'app',
     protoPath: join(__dirname, 'proto/app.proto'),
+    url: `127.0.0.1:50051`
   },
 };
